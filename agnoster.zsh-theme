@@ -25,6 +25,7 @@
 ### Segments of the prompt, default order declaration
 
 typeset -aHg AGNOSTER_PROMPT_SEGMENTS=(
+    prompt_time
     prompt_status
     prompt_context
     prompt_virtualenv
@@ -116,7 +117,7 @@ prompt_git() {
 
 # Dir: current working directory
 prompt_dir() {
-  prompt_segment blue $PRIMARY_FG ' %~ '
+  prompt_segment cyan $PRIMARY_FG ' %3~ '
 }
 
 # Status:
@@ -140,6 +141,12 @@ prompt_virtualenv() {
     prompt_segment $color $PRIMARY_FG
     print -Pn " $(basename $VIRTUAL_ENV) "
   fi
+}
+
+prompt_time() {
+  local what_time_is_it=`date "+%H:%M:%S"`
+  prompt_segment yellow black
+  print -Pn "${what_time_is_it}"
 }
 
 ## Main prompt
